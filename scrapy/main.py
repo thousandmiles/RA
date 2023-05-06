@@ -12,8 +12,15 @@ class_list = res.find_all(attrs={'class': 'generic-container push-top-full push-
 for child in class_list:
     text = child.find_all(attrs = {'class': 'teaser__text'})
     title = child.find_all(attrs = {'class': 'teaser__title'})
+    ref = child.find_all('a')
     class_ = child.find(attrs={'class': 'ff-primary-bold-rte subheading-3 color-factory-talk-blue'}).get_text().strip()
+
     for i in range(len(text)):
         text_ = text[i].get_text().strip()
         title_ = title[i].get_text().strip()
-        print( class_, "-----", title_, "-----", text_)
+        ref_ = ref[i]['href'].strip()
+        print(class_)
+        print(title_)
+        print(text_)
+        print(ref_)
+        print("----------------")
