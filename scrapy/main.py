@@ -1,17 +1,15 @@
 from bs4 import BeautifulSoup
 import requests
 
-url = 'https://www.rockwellautomation.com/en-us/products.html'
+all_products_url = 'https://www.rockwellautomation.com/en-us/products.html'
 
-response = requests.get(url)
+response = requests.get(all_products_url)
 
 res = BeautifulSoup(response.text, 'lxml')
 
-# Software 
+# All Software 
 
-# software class
-
-all_soft = []
+all_soft = [] 
 
 class_list = res.find_all(attrs={'class': 'generic-container push-top-full push-bottom-full aem-GridColumn aem-GridColumn--default--12'})
 
@@ -26,18 +24,27 @@ for child in class_list:
         title_ = title[i].get_text().strip()
         ref_ = ref[i]['href'].strip()
 
-        if ref_.startswith("/en"):
-            ref_ = "https://www.rockwellautomation.com" + ref_
+        # if ref_.startswith("/en"):
+        #     ref_ = "https://www.rockwellautomation.com" + ref_
 
         soft_info = [class_, title_, text_, ref_]
         all_soft.append(soft_info)
-        # print(class_)
-        # print(title_)
-        # print(text_)
-        # print(ref_)
-        # print("----------------")
 
 for item in all_soft:
     for i in item:
         print(i)
     print("----------------")
+
+# Single software
+
+# banner__header & banner__description
+single_software_url = 'https://www.rockwellautomation.com/en-us/products/software/factorytalk/operationsuite/metrics.html'
+s_response = requests.get(single_software_url)
+s_res = BeautifulSoup(s_response.text, 'lxml')
+info = s_res.find(attrs = {'class': 'hero-banner__content'})
+
+banner__header = info.find(attrs = {'class': 'hero-banner__header'}).get_text().strip()
+banner__description = info.find(attrs = {'class': 'hero-banner__description subheading-1'}).get_text().strip()
+
+print(banner__header)
+print(banner__description)
