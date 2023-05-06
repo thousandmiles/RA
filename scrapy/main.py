@@ -7,6 +7,12 @@ response = requests.get(url)
 
 res = BeautifulSoup(response.text, 'lxml')
 
+# Software 
+
+# software class
+
+all_soft = []
+
 class_list = res.find_all(attrs={'class': 'generic-container push-top-full push-bottom-full aem-GridColumn aem-GridColumn--default--12'})
 
 for child in class_list:
@@ -14,13 +20,24 @@ for child in class_list:
     title = child.find_all(attrs = {'class': 'teaser__title'})
     ref = child.find_all('a')
     class_ = child.find(attrs={'class': 'ff-primary-bold-rte subheading-3 color-factory-talk-blue'}).get_text().strip()
-
+    
     for i in range(len(text)):
         text_ = text[i].get_text().strip()
         title_ = title[i].get_text().strip()
         ref_ = ref[i]['href'].strip()
-        print(class_)
-        print(title_)
-        print(text_)
-        print(ref_)
-        print("----------------")
+
+        if ref_.startswith("/en"):
+            ref_ = "https://www.rockwellautomation.com" + ref_
+
+        soft_info = [class_, title_, text_, ref_]
+        all_soft.append(soft_info)
+        # print(class_)
+        # print(title_)
+        # print(text_)
+        # print(ref_)
+        # print("----------------")
+
+for item in all_soft:
+    for i in item:
+        print(i)
+    print("----------------")
