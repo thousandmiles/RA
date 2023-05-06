@@ -22,18 +22,19 @@ import requests
 #         print( title, "-----", text)
 
 
-
 single_software_url = 'https://www.rockwellautomation.com/en-us/products/software/factorytalk/operationsuite/metrics.html'
 
 s_response = requests.get(single_software_url)
 
 s_res = BeautifulSoup(s_response.text, 'lxml')
 
-info = s_res.find(attrs = {'class': 'hero-banner__content'})
+info = s_res.find(attrs={'class': 'hero-banner__content'})
 
-banner__header = info.find(attrs = {'class': 'hero-banner__header'}).get_text().strip()
+banner__header = info.find(
+    attrs={'class': 'hero-banner__header'}).get_text().strip()
 
-banner__description = info.find(attrs = {'class': 'hero-banner__description subheading-1'}).get_text().strip()
+banner__description = info.find(
+    attrs={'class': 'hero-banner__description subheading-1'}).get_text().strip()
 
 print(banner__header)
 print(banner__description)
