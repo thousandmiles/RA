@@ -30,4 +30,6 @@ for child in class_list:
         soft_info = tool.Software(class_, title_, text_, ref_)
         soft_info.CompleteURL()
         soft_info.GetBannerInfo()
+        soft_info.GetBackgroundImage()
+        # soft_info.PrintInfo()
         all_soft.append(soft_info)
