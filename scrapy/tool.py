@@ -11,6 +11,9 @@ class Software(object):
         self.ref_ = ref_
         self.banner__header = title_
         self.banner__description = text_
+        self.CompleteURL()
+        self.response = requests.get(self.ref_)
+        self.res = BeautifulSoup(self.response.text, 'lxml')
 
     def CompleteURL(self):
         if self.ref_.startswith("/en"):
@@ -18,10 +21,7 @@ class Software(object):
 
     def GetBannerInfo(self):
 
-        s_response = requests.get(self.ref_)
-        s_res = BeautifulSoup(s_response.text, 'lxml')
-
-        info = s_res.find(attrs={'class': 'hero-banner__content'})
+        info = self.res.find(attrs={'class': 'hero-banner__content'})
         if info is None:
             return
 
@@ -36,19 +36,14 @@ class Software(object):
             return
 
     def GetBackgroundImage(self):
-        print('URL = ', self.ref_)
         self.bg_url = ''
-        response = requests.get(self.ref_)
-        res = BeautifulSoup(response.text, 'lxml')
-        content_bg = res.find(attrs={'class': 'main-image'})
+        content_bg = self.res.find(attrs={'class': 'main-image'})
         if content_bg is not None:
             self.bg_url = content_bg['src'].strip()
             if (self.bg_url.endswith('.jpg') or self.bg_url.endswith('.jpeg') or self.bg_url.endswith('.png')):
                 pass
             else:
                 self.bg_url = ''
-
-        print(self.bg_url)
 
     def PrintInfo(self):
         print('--------------------')
@@ -58,3 +53,4 @@ class Software(object):
         print('URL = ', self.ref_)
         print('Header = ', self.banner__header)
         print('Description = ', self.banner__description)
+        print('Bg URL = ', self.bg_url)
