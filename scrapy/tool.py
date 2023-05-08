@@ -20,7 +20,6 @@ class Software(object):
             self.ref_ = "https://www.rockwellautomation.com" + self.ref_
 
     def GetBannerInfo(self):
-
         info = self.res.find(attrs={'class': 'hero-banner__content'})
         if info is None:
             return
