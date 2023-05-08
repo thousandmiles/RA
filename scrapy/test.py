@@ -22,19 +22,34 @@ import requests
 #         print( title, "-----", text)
 
 
-single_software_url = 'https://www.rockwellautomation.com/en-us/products/software/factorytalk/operationsuite/metrics.html'
+# single_software_url = 'https://www.rockwellautomation.com/en-us/products/software/factorytalk/operationsuite/metrics.html'
 
-s_response = requests.get(single_software_url)
+# s_response = requests.get(single_software_url)
 
-s_res = BeautifulSoup(s_response.text, 'lxml')
+# s_res = BeautifulSoup(s_response.text, 'lxml')
 
-info = s_res.find(attrs={'class': 'hero-banner__content'})
+# info = s_res.find(attrs={'class': 'hero-banner__content'})
 
-banner__header = info.find(
-    attrs={'class': 'hero-banner__header'}).get_text().strip()
+# banner__header = info.find(
+#     attrs={'class': 'hero-banner__header'}).get_text().strip()
 
-banner__description = info.find(
-    attrs={'class': 'hero-banner__description subheading-1'}).get_text().strip()
+# banner__description = info.find(
+#     attrs={'class': 'hero-banner__description subheading-1'}).get_text().strip()
 
-print(banner__header)
-print(banner__description)
+# print(banner__header)
+# print(banner__description)
+
+ref_ = 'https://www.plex.com/products/production-monitoring'
+print('URL = ', ref_)
+response = requests.get(ref_)
+res = BeautifulSoup(response.text, 'lxml')
+
+content_bg = res.find(
+    attrs={'class': 'innerHeroSection absolute-image-right'})
+print(content_bg)
+x = content_bg.find(attrs={
+                    'class': 'media media--blazy media--fx media--fx-lg media--image media--responsive is-b-loaded is-b-animated'})
+
+print(x)
+if content_bg is not None:
+    bg_url = x['src'].strip()
