@@ -1,6 +1,7 @@
 from bs4 import BeautifulSoup
 import requests
 import tool
+import mysql
 
 all_products_url = 'https://www.rockwellautomation.com/en-us/products.html'
 
@@ -14,6 +15,9 @@ all_soft = []
 
 class_list = res.find_all(
     attrs={'class': 'generic-container push-top-full push-bottom-full aem-GridColumn aem-GridColumn--default--12'})
+
+db = mysql.MySQL()
+# db.CreateTable()
 
 for child in class_list:
     text = child.find_all(attrs={'class': 'teaser__text'})
@@ -32,4 +36,7 @@ for child in class_list:
         soft_info.GetBackgroundImage()
         soft_info.GetPublication()
         soft_info.PrintInfo()
+        db.Insert(soft_info)
         all_soft.append(soft_info)
+
+db.Close()
