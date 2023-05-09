@@ -39,17 +39,24 @@ import requests
 # print(banner__header)
 # print(banner__description)
 
-ref_ = 'https://www.plex.com/products/production-monitoring'
-print('URL = ', ref_)
-response = requests.get(ref_)
-res = BeautifulSoup(response.text, 'lxml')
+# ref_ = 'https://www.plex.com/products/production-monitoring'
+# print('URL = ', ref_)
+# response = requests.get(ref_)
+# res = BeautifulSoup(response.text, 'lxml')
 
-content_bg = res.find(
-    attrs={'class': 'innerHeroSection absolute-image-right'})
-print(content_bg)
-x = content_bg.find(attrs={
-                    'class': 'media media--blazy media--fx media--fx-lg media--image media--responsive is-b-loaded is-b-animated'})
+# content_bg = res.find(
+#     attrs={'class': 'innerHeroSection absolute-image-right'})
+# print(content_bg)
+# x = content_bg.find(attrs={
+#                     'class': 'media media--blazy media--fx media--fx-lg media--image media--responsive is-b-loaded is-b-animated'})
 
-print(x)
-if content_bg is not None:
-    bg_url = x['src'].strip()
+# print(x)
+# if content_bg is not None:
+#     bg_url = x['src'].strip()
+
+import mysql
+
+my = mysql.MySQL()
+
+my.CreateTable()
+my.Close()
