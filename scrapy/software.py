@@ -67,3 +67,7 @@ class Software(object):
         print('Bg URL = ', self.bg_url)
         print('Bg Info = ', self.bg_info)
         print('Publication = ', self.publication)
+
+
+# class Product(object):
+#     def __init__(self,)
